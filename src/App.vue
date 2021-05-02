@@ -1,38 +1,44 @@
 <template>
   <div>Jchang274</div>
+  <br />
+
   <div>
-    <el-button type="primary" round>
-      <router-link to="/">主页</router-link>
-    </el-button>
+    <router-link to="/">
+      <el-button type="primary" round>主页 </el-button>
+    </router-link>
     &nbsp;&nbsp;
-    <el-button type="primary" round>
-      <router-link to="/about">关于</router-link>
-    </el-button>
+
+    <router-link to="/about">
+      <el-button type="primary" round>关于</el-button>
+    </router-link>
     &nbsp;&nbsp;
-    <el-button type="primary" round>
-      <router-link to="/hello">你好</router-link>
-    </el-button>
+
+    <router-link to="/hello">
+      <el-button type="primary" round>你好 </el-button>
+    </router-link>
+    &nbsp;&nbsp;
+
+    <router-link to="/echart">
+      <el-button type="primary" round>图表0</el-button>
+    </router-link>
+    &nbsp;&nbsp;
+
+    <router-link to="/echart1">
+      <el-button type="primary" round>图表1</el-button>
+    </router-link>
   </div>
-  <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949">
-  </el-switch>
-  <el-time-picker
-    v-model="value1"
-    :disabled-hours="disabledHours"
-    :disabled-minutes="disabledMinutes"
-    :disabled-seconds="disabledSeconds"
-    placeholder="任意时间点"
-  >
-  </el-time-picker>
-  <el-time-picker
-    arrow-control
-    v-model="value2"
-    :disabled-hours="disabledHours"
-    :disabled-minutes="disabledMinutes"
-    :disabled-seconds="disabledSeconds"
-    placeholder="任意时间点"
-  >
-  </el-time-picker>
+  <br />
+
+  <!-- ########## 走马灯 -->
+  <el-carousel :interval="4000" type="card" height="250px">
+    <el-carousel-item v-for="item in imgList" :key="item.id">
+      <img :src="item.idView" class="image" />
+    </el-carousel-item>
+  </el-carousel>
+
+  <!-- ########## Router显示 -->
   <router-view></router-view>
+
   <!-- 备案号 -->
   <p align="center">
     <a href="http://beian.miit.gov.cn/" style="color: #636363" target="_blank"
@@ -47,42 +53,19 @@
 <script>
 //引用组件参考示例
 //import HelloWorld from './components/HelloWorld.vue'
-
-//Switch开关
-const makeRange = (start, end) => {
-  const result = [];
-  for (let i = start; i <= end; i++) {
-    result.push(i);
-  }
-  return result;
-};
 export default {
+  name: "index",
   data() {
     return {
-      value: true,
-      value1: new Date(2016, 9, 10, 18, 40),
-      value2: new Date(2016, 9, 10, 18, 40),
+      imgList: [
+        { id: 0, idView: "img/1.jpg" },
+        { id: 1, idView: "img/2.jpg" },
+        { id: 2, idView: "img/3.jpg" },
+        { id: 3, idView: "img/4.jpg" },
+      ],
     };
   },
-  methods: {
-    // 如允许 17:30:00 - 18:30:00
-    disabledHours() {
-      return makeRange(0, 16).concat(makeRange(19, 23));
-    },
-    disabledMinutes(hour) {
-      if (hour === 17) {
-        return makeRange(0, 29);
-      }
-      if (hour === 18) {
-        return makeRange(31, 59);
-      }
-    },
-    disabledSeconds(hour, minute) {
-      if (hour === 18 && minute === 30) {
-        return makeRange(1, 59);
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -97,5 +80,22 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+/* ########## 走马灯 Style */
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
 }
 </style>
