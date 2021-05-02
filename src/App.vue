@@ -30,9 +30,10 @@
   <br />
 
   <!-- ########## 走马灯 -->
-  <el-carousel :interval="4000" type="card" height="250px">
-    <el-carousel-item v-for="item in imgList" :key="item.id">
-      <img :src="item.idView" class="image" />
+  <el-carousel :interval="4000" type="card" height="200px">
+    <el-carousel-item v-for="item in 4" :key="item">
+      <h3 class="medium">{{ item }}</h3>
+      
     </el-carousel-item>
   </el-carousel>
 
@@ -53,20 +54,6 @@
 <script>
 //引用组件参考示例
 //import HelloWorld from './components/HelloWorld.vue'
-export default {
-  name: "index",
-  data() {
-    return {
-      imgList: [
-        { id: 0, idView: "img/1.jpg" },
-        { id: 1, idView: "img/2.jpg" },
-        { id: 2, idView: "img/3.jpg" },
-        { id: 3, idView: "img/4.jpg" },
-      ],
-    };
-  },
-  methods: {},
-};
 </script>
 
 
